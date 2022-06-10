@@ -1,26 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled from 'styled-components';
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Wrapper>
+      <h1>React Typescript Fizz Buzz</h1>
+      <p>
+        Counting incrementally, replacing any number divisible by three with the
+        word "fizz", and any number divisible by five with the word "buzz". For
+        numbers which are multiples of both three and five print “FizzBuzz”
+      </p>
+      <h2>0</h2>
+      <button>-</button>
+      <button>+</button>
+    </Wrapper>
   );
 }
 
-export default App;
+const Wrapper = styled.div`
+  text-align: center;
+
+  button {
+    font-size: larger;
+    align-self: center;
+  }
+`;
