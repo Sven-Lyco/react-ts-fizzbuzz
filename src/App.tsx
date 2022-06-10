@@ -43,7 +43,7 @@ const Main = styled.main`
 
   button {
     font-size: larger;
-    font-weight: bold;
+    font-weight: bolder;
     align-self: center;
     padding: 5px;
   }
