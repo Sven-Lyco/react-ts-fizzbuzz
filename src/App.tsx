@@ -9,7 +9,7 @@ export default function App() {
 
   return (
     <Main>
-      <h1>React Typescript Fizz Buzz</h1>
+      <h1>React Typescript FizzBuzz</h1>
       <p>
         Counting incrementally, replacing any number divisible by three with the
         word "Fizz", and any number divisible by five with the word "Buzz". For
