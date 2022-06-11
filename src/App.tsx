@@ -47,9 +47,10 @@ export default function App() {
           step={1}
           onChange={handleSecondInputChange}
         />
-        <button onClick={() => fizzBuzzFunction(firstInput, secondInput)}>
+        <button onClick={() => handleFizzBuzzFunction(firstInput, secondInput)}>
           Show FizzBuzz
         </button>
+        <button onClick={() => handleReset()}>Reset</button>
       </InputWrapper>
       <List role="list">
         {fizzBuzzArray?.map((element, index) => {
@@ -77,7 +78,7 @@ export default function App() {
     setSecondInput(Number(event.target.value));
   }
 
-  function fizzBuzzFunction(firstInput: number, secondInput: number) {
+  function handleFizzBuzzFunction(firstInput: number, secondInput: number) {
     let arr: string[] = [];
 
     if (firstInput < secondInput) {
@@ -96,6 +97,12 @@ export default function App() {
     } else {
       alert('the second number must be greater than the first number ');
     }
+  }
+
+  function handleReset() {
+    setFirstInput(1);
+    setSecondInput(1);
+    setFizzBuzzArray([]);
   }
 }
 
