@@ -15,15 +15,7 @@ export default function App() {
         word "Fizz", and any number divisible by five with the word "Buzz". For
         numbers which are multiples of both three and five print “FizzBuzz”
       </p>
-      <h2>
-        {count % 15 === 0
-          ? 'FizzBuzz'
-          : count % 3 === 0
-          ? 'Fizz'
-          : count % 5 === 0
-          ? 'Buzz'
-          : count}
-      </h2>
+      <h2>{showNumbersOrFizzBuzz(count)}</h2>
       <button onClick={handleDecrement}>-</button>
       <button onClick={handleIncrement}>+</button>
       <InputWrapper>
@@ -53,12 +45,25 @@ export default function App() {
         <button onClick={() => handleReset()}>Reset</button>
       </InputWrapper>
       <List role="list">
-        {fizzBuzzArray?.map((element, index) => {
+        {fizzBuzzArray.map((element, index) => {
           return <li key={index}>{element}</li>;
         })}
       </List>
     </Main>
   );
+
+  function showNumbersOrFizzBuzz(count: number) {
+    switch (true) {
+      case count % 15 === 0:
+        return 'FizzBuzz';
+      case count % 3 === 0:
+        return 'Fizz';
+      case count % 5 === 0:
+        return 'Buzz';
+      default:
+        return count;
+    }
+  }
 
   function handleIncrement() {
     let newCount = count;
@@ -97,7 +102,7 @@ export default function App() {
       }
       setFizzBuzzArray(arr);
     } else {
-      alert('the second number must be greater than the first number ');
+      alert('The second number must be greater than the first number!');
     }
   }
 
