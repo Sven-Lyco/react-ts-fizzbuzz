@@ -2,10 +2,10 @@ import React, { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 
 export default function App() {
-  let [count, setCount] = useState<number>(1);
-  let [fizzBuzzArray, setFizzBuzzArray] = useState<string[]>([]);
-  let [firstInput, setFirstInput] = useState<number>(1);
-  let [secondInput, setSecondInput] = useState<number>(1);
+  const [count, setCount] = useState<number>(1);
+  const [fizzBuzzArray, setFizzBuzzArray] = useState<string[]>([]);
+  const [firstInput, setFirstInput] = useState<number>(1);
+  const [secondInput, setSecondInput] = useState<number>(1);
 
   return (
     <Main>
@@ -61,12 +61,14 @@ export default function App() {
   );
 
   function handleIncrement() {
-    setCount((count += 1));
+    let newCount = count;
+    setCount((newCount += 1));
   }
 
   function handleDecrement() {
+    let newCount = count;
     if (count > 1) {
-      setCount((count -= 1));
+      setCount((newCount -= 1));
     }
   }
 
