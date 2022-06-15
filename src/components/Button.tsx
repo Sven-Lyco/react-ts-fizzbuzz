@@ -1,12 +1,15 @@
 import styled from 'styled-components';
 
-interface Props {
+interface ButtonProps {
   children: string;
   onClick: () => void;
 }
 
-export default function Button(props: Props) {
-  return <StyledButton onClick={props.onClick}>{props.children}</StyledButton>;
+export default function Button({
+  children,
+  onClick,
+}: ButtonProps): JSX.Element {
+  return <StyledButton onClick={onClick}>{children}</StyledButton>;
 }
 
 const StyledButton = styled.button`
