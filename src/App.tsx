@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
+import Button from './components/Button';
 
 export default function App() {
   const [count, setCount] = useState<number>(1);
@@ -16,8 +17,8 @@ export default function App() {
         numbers which are multiples of both three and five print “FizzBuzz”
       </p>
       <h2>{showNumbersOrFizzBuzz(count)}</h2>
-      <button onClick={handleDecrement}>-</button>
-      <button onClick={handleIncrement}>+</button>
+      <Button onClick={handleDecrement}>-</Button>
+      <Button onClick={handleIncrement}>+</Button>
       <InputWrapper>
         <label htmlFor="first-number">First Number</label>
         <input
@@ -39,10 +40,10 @@ export default function App() {
           step={1}
           onChange={handleSecondInputChange}
         />
-        <button onClick={() => handleFizzBuzzFunction(firstInput, secondInput)}>
+        <Button onClick={() => handleFizzBuzzFunction(firstInput, secondInput)}>
           Show FizzBuzz
-        </button>
-        <button onClick={() => handleReset()}>Reset</button>
+        </Button>
+        <Button onClick={() => handleReset()}>Reset</Button>
       </InputWrapper>
       <List role="list">
         {fizzBuzzArray.map((element, index) => {
@@ -116,13 +117,6 @@ export default function App() {
 const Main = styled.main`
   padding: 10px;
   text-align: center;
-
-  button {
-    font-size: larger;
-    font-weight: bolder;
-    align-self: center;
-    padding: 5px;
-  }
 `;
 
 const InputWrapper = styled.div`
@@ -131,6 +125,7 @@ const InputWrapper = styled.div`
   gap: 25px;
   margin: 50px 0;
 `;
+
 const List = styled.ul`
   list-style: none;
   display: flex;
