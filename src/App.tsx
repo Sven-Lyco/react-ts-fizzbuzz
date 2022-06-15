@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 import Button from './components/Button';
+import Input from './components/Input';
 
 export default function App() {
   const [count, setCount] = useState<number>(1);
@@ -20,21 +21,17 @@ export default function App() {
       <Button onClick={handleDecrement}>-</Button>
       <Button onClick={handleIncrement}>+</Button>
       <InputWrapper>
-        <label htmlFor="first-number">First Number</label>
-        <input
-          type="number"
+        <Input
           name="first-number"
-          id="first-number"
+          labelText="First number"
           value={firstInput}
           min={1}
           step={1}
           onChange={handleFirstInputChange}
         />
-        <label htmlFor="second-number">Second Number</label>
-        <input
-          type="number"
+        <Input
           name="second-number"
-          id="second-number"
+          labelText="Second number"
           value={secondInput}
           min={1}
           step={1}
@@ -78,7 +75,7 @@ export default function App() {
     }
   }
 
-  function handleFirstInputChange(event: ChangeEvent<HTMLInputElement>) {
+  function handleFirstInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     setFirstInput(Number(event.target.value));
   }
 
