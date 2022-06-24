@@ -3,18 +3,19 @@ import useInput from './useInput';
 
 export default function useFizzBuzz() {
   const [fizzBuzzArray, setFizzBuzzArray] = useState<string[]>([]);
+  const [counter, setCount] = useState<string | number>();
   const { setFirstInput, setSecondInput } = useInput();
 
   function showNumbersOrFizzBuzz(count: number) {
     switch (true) {
       case count % 15 === 0:
-        return 'FizzBuzz';
+        return setCount('FizzBuzz');
       case count % 3 === 0:
-        return 'Fizz';
+        return setCount('Fizz');
       case count % 5 === 0:
-        return 'Buzz';
+        return setCount('Buzz');
       default:
-        return count;
+        return setCount(count);
     }
   }
 
@@ -47,6 +48,7 @@ export default function useFizzBuzz() {
 
   return {
     fizzBuzzArray,
+    counter,
     showNumbersOrFizzBuzz,
     handleFizzBuzzFunction,
     handleReset,
