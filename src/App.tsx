@@ -19,7 +19,6 @@ export default function App() {
     counter,
     showNumbersOrFizzBuzz,
     handleFizzBuzzFunction,
-    handleReset,
   } = useFizzBuzz();
 
   useEffect(() => {
@@ -57,7 +56,6 @@ export default function App() {
         <Button onClick={() => handleFizzBuzzFunction(firstInput, secondInput)}>
           Show FizzBuzz
         </Button>
-        <Button onClick={() => handleReset()}>Reset</Button>
       </InputWrapper>
       <List role="list">
         {fizzBuzzArray.map((element, index) => {

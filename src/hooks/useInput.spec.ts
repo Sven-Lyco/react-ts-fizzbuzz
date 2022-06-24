@@ -16,6 +16,7 @@ test('should set firstInput', () => {
   const event = {
     target: { value: firstValue },
   } as React.ChangeEvent<HTMLInputElement>;
+
   act(() => {
     result.current.handleFirstInputChange(event);
   });

@@ -12,11 +12,15 @@ export default function useInput() {
     setSecondInput(Number(event.target.value));
   }
 
+  function handleResetInputs() {
+    setFirstInput(1);
+    setSecondInput(1);
+  }
+
   return {
     firstInput,
     secondInput,
-    setFirstInput,
-    setSecondInput,
+    handleResetInputs,
     handleFirstInputChange,
     handleSecondInputChange,
   };

@@ -1,10 +1,8 @@
 import { useState } from 'react';
-import useInput from './useInput';
 
 export default function useFizzBuzz() {
   const [fizzBuzzArray, setFizzBuzzArray] = useState<string[]>([]);
-  const [counter, setCount] = useState<string | number>();
-  const { setFirstInput, setSecondInput } = useInput();
+  const [counter, setCount] = useState<string | number>(1);
 
   function showNumbersOrFizzBuzz(count: number) {
     switch (true) {
@@ -40,17 +38,10 @@ export default function useFizzBuzz() {
     }
   }
 
-  function handleReset() {
-    setFirstInput(1);
-    setSecondInput(1);
-    setFizzBuzzArray([]);
-  }
-
   return {
     fizzBuzzArray,
     counter,
     showNumbersOrFizzBuzz,
     handleFizzBuzzFunction,
-    handleReset,
   };
 }

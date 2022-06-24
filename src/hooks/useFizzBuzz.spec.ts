@@ -2,13 +2,13 @@ import { renderHook, act } from '@testing-library/react';
 import useFizzBuzz from './useFizzBuzz';
 import useInput from './useInput';
 
-test('should use fizzBuzzArray', () => {
+test('should use useFizzBuzz hook', () => {
   const { result } = renderHook(() => useFizzBuzz());
 
   expect(result.current.fizzBuzzArray).toEqual<string[]>([]);
+  expect(result.current.counter).toEqual<string | number>(1);
   expect(typeof result.current.showNumbersOrFizzBuzz).toBe('function');
   expect(typeof result.current.handleFizzBuzzFunction).toBe('function');
-  expect(typeof result.current.handleReset).toBe('function');
 });
 
 test('should show FizzBuzz', () => {
@@ -67,14 +67,21 @@ test('should return FizzBuzz Array', () => {
   ]);
 });
 
-test('should reset Inputs and Array', () => {
+test('shows alert if firstInput is higher than secondInput', () => {
+  window.alert = jest.fn();
   const { result } = renderHook(() => useFizzBuzz());
   const { result: inputResult } = renderHook(() => useInput());
+  const firstValue = '2';
+  const event = {
+    target: { value: firstValue },
+  } as React.ChangeEvent<HTMLInputElement>;
 
   act(() => {
-    result.current.handleReset();
+    inputResult.current.handleFirstInputChange(event);
+    result.current.handleFizzBuzzFunction(Number(firstValue), 1);
   });
-  expect(result.current.fizzBuzzArray).toStrictEqual([]);
-  expect(inputResult.current.firstInput).toBe(1);
+
+  expect(inputResult.current.firstInput).toBe(2);
   expect(inputResult.current.secondInput).toBe(1);
+  expect(window.alert).toBeCalled();
 });
