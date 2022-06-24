@@ -2,7 +2,7 @@ import { renderHook, act } from '@testing-library/react';
 import useFizzBuzz from './useFizzBuzz';
 import useInput from './useInput';
 
-test('should use useFizzBuzz hook', () => {
+test('should use useFizzBuzz', () => {
   const { result } = renderHook(() => useFizzBuzz());
 
   expect(result.current.fizzBuzzArray).toEqual<string[]>([]);

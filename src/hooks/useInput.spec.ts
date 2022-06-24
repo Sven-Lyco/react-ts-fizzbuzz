@@ -1,7 +1,7 @@
 import { renderHook, act } from '@testing-library/react';
 import useInput from './useInput';
 
-test('should use firstInput, secondInput, handleFirstInputChange, handleSecondInputChange', () => {
+test('should use useInput', () => {
   const { result } = renderHook(() => useInput());
 
   expect(result.current.firstInput).toEqual<number>(1);

@@ -1,7 +1,7 @@
 import { renderHook, act } from '@testing-library/react';
 import useCount from './useCount';
 
-test('should use count', () => {
+test('should use useCount', () => {
   const { result } = renderHook(() => useCount());
 
   expect(result.current.count).toBe(1);
