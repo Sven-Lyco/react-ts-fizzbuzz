@@ -1,13 +1,24 @@
-import React, { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 import Button from './components/Button';
 import Input from './components/Input';
+import useCount from './hooks/useCount';
+import useFizzBuzz from './hooks/useFizzBuzz';
+import useInput from './hooks/useInput';
 
 export default function App() {
-  const [count, setCount] = useState<number>(1);
-  const [fizzBuzzArray, setFizzBuzzArray] = useState<string[]>([]);
-  const [firstInput, setFirstInput] = useState<number>(1);
-  const [secondInput, setSecondInput] = useState<number>(1);
+  const { count, handleIncrementCount, handleDecrementCount } = useCount();
+  const {
+    firstInput,
+    secondInput,
+    handleFirstInputChange,
+    handleSecondInputChange,
+  } = useInput();
+  const {
+    fizzBuzzArray,
+    showNumbersOrFizzBuzz,
+    handleFizzBuzzFunction,
+    handleReset,
+  } = useFizzBuzz();
 
   return (
     <Main>
@@ -18,8 +29,8 @@ export default function App() {
         numbers which are multiples of both three and five print “FizzBuzz”
       </p>
       <h2>{showNumbersOrFizzBuzz(count)}</h2>
-      <Button onClick={handleDecrement}>-</Button>
-      <Button onClick={handleIncrement}>+</Button>
+      <Button onClick={handleDecrementCount}>-</Button>
+      <Button onClick={handleIncrementCount}>+</Button>
       <InputWrapper>
         <Input
           name="first-number"
@@ -49,66 +60,6 @@ export default function App() {
       </List>
     </Main>
   );
-
-  function showNumbersOrFizzBuzz(count: number) {
-    switch (true) {
-      case count % 15 === 0:
-        return 'FizzBuzz';
-      case count % 3 === 0:
-        return 'Fizz';
-      case count % 5 === 0:
-        return 'Buzz';
-      default:
-        return count;
-    }
-  }
-
-  function handleIncrement() {
-    let newCount = count;
-    setCount((newCount += 1));
-  }
-
-  function handleDecrement() {
-    let newCount = count;
-    if (count > 1) {
-      setCount((newCount -= 1));
-    }
-  }
-
-  function handleFirstInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setFirstInput(Number(event.target.value));
-  }
-
-  function handleSecondInputChange(event: ChangeEvent<HTMLInputElement>) {
-    setSecondInput(Number(event.target.value));
-  }
-
-  function handleFizzBuzzFunction(firstInput: number, secondInput: number) {
-    let arr: string[] = [];
-
-    if (firstInput < secondInput) {
-      for (let i = firstInput; i <= secondInput; i++) {
-        if (i % 3 === 0 && i % 5 === 0) {
-          arr.push('FizzBuzz');
-        } else if (i % 3 === 0) {
-          arr.push('Fizz');
-        } else if (i % 5 === 0) {
-          arr.push('Buzz');
-        } else {
-          arr.push(i.toString());
-        }
-      }
-      setFizzBuzzArray(arr);
-    } else {
-      alert('The second number must be greater than the first number!');
-    }
-  }
-
-  function handleReset() {
-    setFirstInput(1);
-    setSecondInput(1);
-    setFizzBuzzArray([]);
-  }
 }
 
 const Main = styled.main`
