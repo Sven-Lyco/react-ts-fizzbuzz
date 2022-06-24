@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import Button from './components/Button';
 import Input from './components/Input';
@@ -15,10 +16,15 @@ export default function App() {
   } = useInput();
   const {
     fizzBuzzArray,
+    counter,
     showNumbersOrFizzBuzz,
     handleFizzBuzzFunction,
     handleReset,
   } = useFizzBuzz();
+
+  useEffect(() => {
+    showNumbersOrFizzBuzz(count);
+  }, [count, showNumbersOrFizzBuzz]);
 
   return (
     <Main>
@@ -28,7 +34,7 @@ export default function App() {
         word "Fizz", and any number divisible by five with the word "Buzz". For
         numbers which are multiples of both three and five print “FizzBuzz”
       </p>
-      <h2>{showNumbersOrFizzBuzz(count)}</h2>
+      <h2>{counter}</h2>
       <Button onClick={handleDecrementCount}>-</Button>
       <Button onClick={handleIncrementCount}>+</Button>
       <InputWrapper>
