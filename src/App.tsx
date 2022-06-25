@@ -1,11 +1,29 @@
-import React, { ChangeEvent, useState } from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
+import Button from './components/Button';
+import Input from './components/Input';
+import useCount from './hooks/useCount';
+import useFizzBuzz from './hooks/useFizzBuzz';
+import useInput from './hooks/useInput';
 
 export default function App() {
-  const [count, setCount] = useState<number>(1);
-  const [fizzBuzzArray, setFizzBuzzArray] = useState<string[]>([]);
-  const [firstInput, setFirstInput] = useState<number>(1);
-  const [secondInput, setSecondInput] = useState<number>(1);
+  const { count, handleIncrementCount, handleDecrementCount } = useCount();
+  const {
+    firstInput,
+    secondInput,
+    handleFirstInputChange,
+    handleSecondInputChange,
+  } = useInput();
+  const {
+    fizzBuzzArray,
+    counter,
+    showNumbersOrFizzBuzz,
+    handleFizzBuzzFunction,
+  } = useFizzBuzz();
+
+  useEffect(() => {
+    showNumbersOrFizzBuzz(count);
+  }, [count, showNumbersOrFizzBuzz]);
 
   return (
     <Main>
@@ -15,34 +33,29 @@ export default function App() {
         word "Fizz", and any number divisible by five with the word "Buzz". For
         numbers which are multiples of both three and five print “FizzBuzz”
       </p>
-      <h2>{showNumbersOrFizzBuzz(count)}</h2>
-      <button onClick={handleDecrement}>-</button>
-      <button onClick={handleIncrement}>+</button>
+      <h2>{counter}</h2>
+      <Button onClick={handleDecrementCount}>-</Button>
+      <Button onClick={handleIncrementCount}>+</Button>
       <InputWrapper>
-        <label htmlFor="first-number">First Number</label>
-        <input
-          type="number"
+        <Input
           name="first-number"
-          id="first-number"
+          labelText="First number"
           value={firstInput}
           min={1}
           step={1}
           onChange={handleFirstInputChange}
         />
-        <label htmlFor="second-number">Second Number</label>
-        <input
-          type="number"
+        <Input
           name="second-number"
-          id="second-number"
+          labelText="Second number"
           value={secondInput}
           min={1}
           step={1}
           onChange={handleSecondInputChange}
         />
-        <button onClick={() => handleFizzBuzzFunction(firstInput, secondInput)}>
+        <Button onClick={() => handleFizzBuzzFunction(firstInput, secondInput)}>
           Show FizzBuzz
-        </button>
-        <button onClick={() => handleReset()}>Reset</button>
+        </Button>
       </InputWrapper>
       <List role="list">
         {fizzBuzzArray.map((element, index) => {
@@ -51,78 +64,11 @@ export default function App() {
       </List>
     </Main>
   );
-
-  function showNumbersOrFizzBuzz(count: number) {
-    switch (true) {
-      case count % 15 === 0:
-        return 'FizzBuzz';
-      case count % 3 === 0:
-        return 'Fizz';
-      case count % 5 === 0:
-        return 'Buzz';
-      default:
-        return count;
-    }
-  }
-
-  function handleIncrement() {
-    let newCount = count;
-    setCount((newCount += 1));
-  }
-
-  function handleDecrement() {
-    let newCount = count;
-    if (count > 1) {
-      setCount((newCount -= 1));
-    }
-  }
-
-  function handleFirstInputChange(event: ChangeEvent<HTMLInputElement>) {
-    setFirstInput(Number(event.target.value));
-  }
-
-  function handleSecondInputChange(event: ChangeEvent<HTMLInputElement>) {
-    setSecondInput(Number(event.target.value));
-  }
-
-  function handleFizzBuzzFunction(firstInput: number, secondInput: number) {
-    let arr: string[] = [];
-
-    if (firstInput < secondInput) {
-      for (let i = firstInput; i <= secondInput; i++) {
-        if (i % 3 === 0 && i % 5 === 0) {
-          arr.push('FizzBuzz');
-        } else if (i % 3 === 0) {
-          arr.push('Fizz');
-        } else if (i % 5 === 0) {
-          arr.push('Buzz');
-        } else {
-          arr.push(i.toString());
-        }
-      }
-      setFizzBuzzArray(arr);
-    } else {
-      alert('The second number must be greater than the first number!');
-    }
-  }
-
-  function handleReset() {
-    setFirstInput(1);
-    setSecondInput(1);
-    setFizzBuzzArray([]);
-  }
 }
 
 const Main = styled.main`
   padding: 10px;
   text-align: center;
-
-  button {
-    font-size: larger;
-    font-weight: bolder;
-    align-self: center;
-    padding: 5px;
-  }
 `;
 
 const InputWrapper = styled.div`
@@ -131,6 +77,7 @@ const InputWrapper = styled.div`
   gap: 25px;
   margin: 50px 0;
 `;
+
 const List = styled.ul`
   list-style: none;
   display: flex;
