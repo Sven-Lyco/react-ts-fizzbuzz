@@ -12,7 +12,7 @@ test('should use useInput', () => {
 
 test('should set firstInput', () => {
   const { result } = renderHook(() => useInput());
-  const firstValue = '1';
+  const firstValue = '2';
   const event = {
     target: { value: firstValue },
   } as React.ChangeEvent<HTMLInputElement>;
@@ -20,7 +20,7 @@ test('should set firstInput', () => {
   act(() => {
     result.current.handleFirstInputChange(event);
   });
-  expect(result.current.firstInput).toBe(1);
+  expect(result.current.firstInput).toBe(2);
 });
 
 test('should set secondInput', () => {
