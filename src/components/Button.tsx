@@ -1,9 +1,5 @@
 import styled from 'styled-components';
-
-interface ButtonProps {
-  children: string;
-  onClick: () => void;
-}
+import ButtonProps from '../interfaces/ButtonProps';
 
 export default function Button({
   children,
