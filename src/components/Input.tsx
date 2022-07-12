@@ -7,7 +7,7 @@ export default function Input({
   min,
   step,
   onChange,
-}: InputProps): JSX.Element {
+}: InputProps) {
   return (
     <>
       <label htmlFor={name}>{labelText}</label>
