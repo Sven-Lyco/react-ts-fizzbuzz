@@ -1,14 +1,7 @@
 import styled from 'styled-components';
+import ButtonProps from '../interfaces/ButtonProps';
 
-interface ButtonProps {
-  children: string;
-  onClick: () => void;
-}
-
-export default function Button({
-  children,
-  onClick,
-}: ButtonProps): JSX.Element {
+export default function Button({ children, onClick }: ButtonProps) {
   return <StyledButton onClick={onClick}>{children}</StyledButton>;
 }
 
